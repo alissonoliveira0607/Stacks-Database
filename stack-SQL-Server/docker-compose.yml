@@ -1,0 +1,26 @@
+version: '3.8'  # Versão do formato do arquivo Docker Compose.
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      SA_PASSWORD: "Devops@2023"  # Senha do administrador do SQL Server.
+      ACCEPT_EULA: "Y"  # Aceita o Acordo de Licença de Usuário Final do SQL Server.
+      MSSQL_PID: "Developer"  # Define a edição do SQL Server como "Developer".
+    ports:
+      - "1433:1433"  # Mapeia a porta 1433 do host para a porta 1433 do contêiner SQL Server.
+    networks:
+      - stack  # Associa o serviço à rede personalizada 'stack'.
+  #---------------------------------------------------------------#
+  mssqltools:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - sqlserver  # Dependência do serviço mssqltools para o sqlserver (espera que o sqlserver esteja pronto).
+    volumes:
+      - ./01-BaseGeografica.sql:/tmp/01-BaseGeografica.sql  # Monta um arquivo SQL no contêiner.
+      - ./02-BaseGeografica.sql:/tmp/02-BaseGeografica.sql  # Monta outro arquivo SQL no contêiner.
+      - ./init-basegeografica.sh:/tmp/init-basegeografica.sh  # Monta um script de inicialização no contêiner.
+    command: /bin/bash ./tmp/init-basegeografica.sh  # Comando a ser executado no contêiner.
+
+networks:
+  stack:  # Definição de uma rede personalizada chamada 'stack' para comunicação entre contêineres.
