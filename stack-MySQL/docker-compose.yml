@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+   image: mysql:latest
+   environment:
+     # Configuração das variáveis de ambiente do MySQL
+     - MYSQL_ROOT_PASSWORD=devops
+     - MYSQL_DATABASE=devops
+     - MYSQL_USER=devops
+     - MYSQL_PASSWORD=devops
+     - MYSQL_ROOT_HOST:'%'  # Permite conexões remotas ao MySQL
+   ports:
+     - 3306:3306
+   volumes:
+     - ./mysql-data:/var/lib/mysql
+   networks:
+     - stack
+  
+networks:
+  stack:
