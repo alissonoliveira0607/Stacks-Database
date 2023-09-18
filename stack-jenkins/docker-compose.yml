@@ -1,0 +1,21 @@
+version: '3'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8080:8080" # Porta para acessar a interface web do Jenkins
+      - "50000:50000" # Porta para comunicação com agentes
+    volumes:
+      - ./jenkins_home:/var/jenkins_home # Mapeamento de volume para persistir os dados do Jenkins
+      #- JAVA_OPTS=-Duser.timezone=America/Sao_Paulo # Defina seu fuso horário
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Duser.timezone=America/Sao_Paulo -Djava.util.logging.config.file=/var/jenkins_home/log.properties -Dfile.encoding=UTF-8
+    networks:
+      - stack
+
+networks:
+  stack:
+
+volumes:
+  jenkins_home: # Define o volume para persistir os dados do Jenkins
