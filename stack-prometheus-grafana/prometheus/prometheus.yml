@@ -7,10 +7,6 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'flask-app'  # Expões as métricas da aplicação flask
+  - job_name: 'flask-app'  # Expõe as métricas da aplicação flask
     static_configs:
       - targets: ['flask-app:5000']
-
-  - job_name: 'mysqld-exporter'  # Expões as métricas do DB
-    static_configs:
-      - targets: ['mysqld-exporter:9104']
