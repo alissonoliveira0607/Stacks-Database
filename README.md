@@ -1,4 +1,4 @@
-# **Provisiona stacks de banco de dados relacionais**
+# **Provisiona stacks de banco de dados e observabilidade**
 
 Dependências
 - [GIT]
