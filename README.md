@@ -25,3 +25,13 @@ docker-compose up -d
 cd stack-jenkins
 
 docker-compose up -d
+
+## **ELASTICSEARCH**
+cd stack-elasticsearch
+
+docker-compose up -d
+
+## **PROMETHEUS**
+cd stack-prometheus
+
+docker-compose up -d
